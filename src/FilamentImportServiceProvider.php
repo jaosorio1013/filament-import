@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport;
+namespace Jaosorio1013\FilamentImport;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

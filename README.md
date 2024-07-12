@@ -1,309 +1,573 @@
-![Screenshot of Login](./art/screenshot.png)
+WIP
 
-# Filament Plugin for Import CSV and XLS into Database
+[//]: # (![Screenshot of Login]&#40;./art/screenshot.png&#41;)
 
-<a href="https://filamentadmin.com/docs/2.x/admin/installation">
-    <img alt="FILAMENT 2.x" src="https://img.shields.io/badge/FILAMENT-2.x-EBB304">
-</a>
-<a href="https://packagist.org/packages/konnco/filament-import">
-    <img alt="Packagist" src="https://img.shields.io/packagist/v/konnco/filament-import.svg?logo=packagist">
-</a>
-<a href="https://packagist.org/packages/konnco/filament-import">
-    <img alt="Downloads" src="https://img.shields.io/packagist/dt/konnco/filament-import.svg" >
-</a>
+[//]: # ()
+[//]: # (# Filament Plugin for Import CSV and XLS into Database)
 
-[![Code Styles](https://github.com/konnco/filament-import/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/konnco/filament-import/actions/workflows/php-cs-fixer.yml)
-[![run-tests](https://github.com/konnco/filament-import/actions/workflows/run-tests.yml/badge.svg)](https://github.com/konnco/filament-import/actions/workflows/run-tests.yml)
+[//]: # ()
+[//]: # (<a href="https://filamentadmin.com/docs/2.x/admin/installation">)
 
-This package will make it easier for you to import from files to your model, very easily without the need to do templates.
+[//]: # (    <img alt="FILAMENT 2.x" src="https://img.shields.io/badge/FILAMENT-2.x-EBB304">)
 
-all you have to do is drag and drop and match the fields and columns of your file, and let magic happens!
+[//]: # (</a>)
 
-## Installation
+[//]: # (<a href="https://packagist.org/packages/jaosorio1013/filament-import">)
 
-You can install the package via composer:
+[//]: # (    <img alt="Packagist" src="https://img.shields.io/packagist/v/jaosorio1013/filament-import.svg?logo=packagist">)
 
-```bash
-composer require konnco/filament-import
-```
+[//]: # (</a>)
 
-## Publishing Config
+[//]: # (<a href="https://packagist.org/packages/jaosorio1013/filament-import">)
 
-If you want to do the settings manually, please publish the existing config.
+[//]: # (    <img alt="Downloads" src="https://img.shields.io/packagist/dt/jaosorio1013/filament-import.svg" >)
 
-```bash
-php artisan vendor:publish --tag=filament-import-config
-```
+[//]: # (</a>)
 
-## Usage
+[//]: # ()
+[//]: # ([![Code Styles]&#40;https://github.com/jaosorio1013/filament-import/actions/workflows/php-cs-fixer.yml/badge.svg&#41;]&#40;https://github.com/jaosorio1013/filament-import/actions/workflows/php-cs-fixer.yml&#41;)
 
-import the actions into `ListRecords` page
+[//]: # ([![run-tests]&#40;https://github.com/jaosorio1013/filament-import/actions/workflows/run-tests.yml/badge.svg&#41;]&#40;https://github.com/jaosorio1013/filament-import/actions/workflows/run-tests.yml&#41;)
 
-```php
-use Konnco\FilamentImport\Actions\ImportAction;
-use Konnco\FilamentImport\Actions\ImportField;
+[//]: # ()
+[//]: # (This package will make it easier for you to import from files to your model, very easily without the need to do templates.)
 
-class ListCredentialDatabases extends ListRecords
-{
-    protected static string $resource = CredentialDatabaseResource::class;
+[//]: # ()
+[//]: # (all you have to do is drag and drop and match the fields and columns of your file, and let magic happens!)
 
-    protected function getActions(): array
-    {
-        return [
-            ImportAction::make()
-                ->fields([
-                    ImportField::make('project')
-                        ->label('Project')
-                        ->helperText('Define as project helper'),
-                    ImportField::make('manager')
-                        ->label('Manager'),
-                ])
-        ];
-    }
-}
-```
-### Required Field
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('project')
-                    ->label('Project')
-                    ->required(),
-            ])
-    ];
-}
-```
+[//]: # ()
+[//]: # (## Installation)
 
-### Disable Mass Create
-if you still want to stick with the event model you might need this and turn off mass create
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->massCreate(false)
-            ->fields([
-                ImportField::make('project')
-                    ->label('Project')
-                    ->required(),
-            ])
-    ];
-}
-```
+[//]: # ()
+[//]: # (You can install the package via composer:)
 
-### Filter Out Blank Rows
-If you have a spreadsheet which includes blank data [click here to see more](https://thesoftwarepro.com/excel-tips-how-to-fill-blank-cells/), you can filter these out:
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->handleBlankRows(true)
-            ->fields([
-                ImportField::make('project')
-                    ->label('Project')
-                    ->required(),
-            ])
-    ];
-}
-```
+[//]: # ()
+[//]: # (```bash)
 
-### Field Data Mutation
-you can also manipulate data from row spreadsheet before saving to model
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('project')
-                    ->label('Project')
-                    ->mutateBeforeCreate(fn($value) => Str::of($value)->camelCase())
-                    ->required(),
-            ])
-    ];
-}
-```
-otherwise you can manipulate data and getting all mutated data from field before its getting insert into the database.
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('email')
-                    ->label('Email')
-                    ->required(),
-            ])->mutateBeforeCreate(function($row){
-                $row['password'] = bcrypt($row['email']);
+[//]: # (composer require jaosorio1013/filament-import)
 
-                return $row;
-            })
-    ];
-}
-```
-it is also possible to manipulate data after it was inserted into the database
-```php
-use Illuminate\Database\Eloquent\Model;
+[//]: # (```)
 
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('email')
-                    ->label('Email')
-                    ->required(),
-            ])->mutateAfterCreate(function(Model $model, $row){
-                // do something with the model
+[//]: # ()
+[//]: # (## Publishing Config)
 
-                return $model;
-            })
-    ];
-}
-```
+[//]: # ()
+[//]: # (If you want to do the settings manually, please publish the existing config.)
 
-### Grid Column
-Of course, you can divide the column grid into several parts to beautify the appearance of the data map
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('project')
-                    ->label('Project')
-                    ->required(),
-            ], columns:2)
-    ];
-}
-```
+[//]: # ()
+[//]: # (```bash)
 
-### Json Format Field
-We also support the json format field, which you can set when calling the `make` function and separate the name with a dot annotation
+[//]: # (php artisan vendor:publish --tag=filament-import-config)
 
-```php
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('project.en')
-                    ->label('Project In English')
-                    ->required(),
-                ImportField::make('project.id')
-                    ->label('Project in Indonesia')
-                    ->required(),
-            ], columns:2)
-    ];
-}
-```
+[//]: # (```)
 
-### Static Field Data
-for the static field data you can use the common fields from filament
+[//]: # ()
+[//]: # (## Usage)
 
-```php
-use Filament\Forms\Components\Select;
+[//]: # ()
+[//]: # (import the actions into `ListRecords` page)
 
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('name')
-                    ->label('Project')
-                    ->required(),
-                Select::make('status')
-                    ->options([
-                        'draft' => 'Draft',
-                        'reviewing' => 'Reviewing',
-                        'published' => 'Published',
-                    ])
-            ], columns:2)
-    ];
-}
-```
+[//]: # ()
+[//]: # (```php)
 
-### Unique field
-if your model should be unique, you can pass the name of the field, which will be used to check if a row already exists in the database. if it exists, skip that row (preventing an error about non unique row)
+[//]: # (use Jaosorio1013\FilamentImport\Actions\ImportAction;)
 
-```php
-use Filament\Forms\Components\Select;
+[//]: # (use Jaosorio1013\FilamentImport\Actions\ImportField;)
 
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->uniqueField('email')
-            ->fields([
-                ImportField::make('email')
-                    ->label('Email')
-                    ->required(),
-            ], columns:2)
-    ];
-}
-```
+[//]: # ()
+[//]: # (class ListCredentialDatabases extends ListRecords)
 
-### Validation
-you can make the validation for import fields, for more information about the available validation please check laravel documentation
+[//]: # ({)
 
-```php
-use Filament\Forms\Components\Select;
+[//]: # (    protected static string $resource = CredentialDatabaseResource::class;)
 
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('name')
-                    ->label('Project')
-                    ->rules('required|min:10|max:255'),
-            ], columns:2)
-    ];
-}
-```
+[//]: # ()
+[//]: # (    protected function getActions&#40;&#41;: array)
 
-### Create Record
-you can overide the default record creation closure and put your own code by using `handleRecordCreation` function
+[//]: # (    {)
 
-```php
-use Filament\Forms\Components\Select;
+[//]: # (        return [)
 
-protected function getActions(): array
-{
-    return [
-        ImportAction::make()
-            ->fields([
-                ImportField::make('name')
-                    ->label('Project')
-                    ->rules('required|min:10|max:255'),
-            ], columns:2)
-            ->handleRecordCreation(function($data){
-                return Post::create($data);
-            })
-    ];
-}
-```
+[//]: # (            ImportAction::make&#40;&#41;)
 
+[//]: # (                ->fields&#40;[)
 
-## Testing
+[//]: # (                    ImportField::make&#40;'project'&#41;)
 
-```bash
-composer test
-```
+[//]: # (                        ->label&#40;'Project'&#41;)
 
-## Changelog
+[//]: # (                        ->helperText&#40;'Define as project helper'&#41;,)
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+[//]: # (                    ImportField::make&#40;'manager'&#41;)
 
-## Contributing
+[//]: # (                        ->label&#40;'Manager'&#41;,)
 
-Please see [CONTRIBUTING](https://github.com/konnco/.github/blob/main/CONTRIBUTING.md) for details.
+[//]: # (                ]&#41;)
 
-## Security Vulnerabilities
+[//]: # (        ];)
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+[//]: # (    })
 
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # (### Required Field)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Disable Mass Create)
+
+[//]: # (if you still want to stick with the event model you might need this and turn off mass create)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->massCreate&#40;false&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Filter Out Blank Rows)
+
+[//]: # (If you have a spreadsheet which includes blank data [click here to see more]&#40;https://thesoftwarepro.com/excel-tips-how-to-fill-blank-cells/&#41;, you can filter these out:)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->handleBlankRows&#40;true&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Field Data Mutation)
+
+[//]: # (you can also manipulate data from row spreadsheet before saving to model)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->mutateBeforeCreate&#40;fn&#40;$value&#41; => Str::of&#40;$value&#41;->camelCase&#40;&#41;&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # (otherwise you can manipulate data and getting all mutated data from field before its getting insert into the database.)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'email'&#41;)
+
+[//]: # (                    ->label&#40;'Email'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;->mutateBeforeCreate&#40;function&#40;$row&#41;{)
+
+[//]: # (                $row['password'] = bcrypt&#40;$row['email']&#41;;)
+
+[//]: # ()
+[//]: # (                return $row;)
+
+[//]: # (            }&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # (it is also possible to manipulate data after it was inserted into the database)
+
+[//]: # (```php)
+
+[//]: # (use Illuminate\Database\Eloquent\Model;)
+
+[//]: # ()
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'email'&#41;)
+
+[//]: # (                    ->label&#40;'Email'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ]&#41;->mutateAfterCreate&#40;function&#40;Model $model, $row&#41;{)
+
+[//]: # (                // do something with the model)
+
+[//]: # ()
+[//]: # (                return $model;)
+
+[//]: # (            }&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Grid Column)
+
+[//]: # (Of course, you can divide the column grid into several parts to beautify the appearance of the data map)
+
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Json Format Field)
+
+[//]: # (We also support the json format field, which you can set when calling the `make` function and separate the name with a dot annotation)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'project.en'&#41;)
+
+[//]: # (                    ->label&#40;'Project In English'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (                ImportField::make&#40;'project.id'&#41;)
+
+[//]: # (                    ->label&#40;'Project in Indonesia'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Static Field Data)
+
+[//]: # (for the static field data you can use the common fields from filament)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (use Filament\Forms\Components\Select;)
+
+[//]: # ()
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'name'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (                Select::make&#40;'status'&#41;)
+
+[//]: # (                    ->options&#40;[)
+
+[//]: # (                        'draft' => 'Draft',)
+
+[//]: # (                        'reviewing' => 'Reviewing',)
+
+[//]: # (                        'published' => 'Published',)
+
+[//]: # (                    ]&#41;)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Unique field)
+
+[//]: # (if your model should be unique, you can pass the name of the field, which will be used to check if a row already exists in the database. if it exists, skip that row &#40;preventing an error about non unique row&#41;)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (use Filament\Forms\Components\Select;)
+
+[//]: # ()
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->uniqueField&#40;'email'&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'email'&#41;)
+
+[//]: # (                    ->label&#40;'Email'&#41;)
+
+[//]: # (                    ->required&#40;&#41;,)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Validation)
+
+[//]: # (you can make the validation for import fields, for more information about the available validation please check laravel documentation)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (use Filament\Forms\Components\Select;)
+
+[//]: # ()
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'name'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->rules&#40;'required|min:10|max:255'&#41;,)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (### Create Record)
+
+[//]: # (you can overide the default record creation closure and put your own code by using `handleRecordCreation` function)
+
+[//]: # ()
+[//]: # (```php)
+
+[//]: # (use Filament\Forms\Components\Select;)
+
+[//]: # ()
+[//]: # (protected function getActions&#40;&#41;: array)
+
+[//]: # ({)
+
+[//]: # (    return [)
+
+[//]: # (        ImportAction::make&#40;&#41;)
+
+[//]: # (            ->fields&#40;[)
+
+[//]: # (                ImportField::make&#40;'name'&#41;)
+
+[//]: # (                    ->label&#40;'Project'&#41;)
+
+[//]: # (                    ->rules&#40;'required|min:10|max:255'&#41;,)
+
+[//]: # (            ], columns:2&#41;)
+
+[//]: # (            ->handleRecordCreation&#40;function&#40;$data&#41;{)
+
+[//]: # (                return Post::create&#40;$data&#41;;)
+
+[//]: # (            }&#41;)
+
+[//]: # (    ];)
+
+[//]: # (})
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # ()
+[//]: # (## Testing)
+
+[//]: # ()
+[//]: # (```bash)
+
+[//]: # (composer test)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (## Changelog)
+
+[//]: # ()
+[//]: # (Please see [CHANGELOG]&#40;CHANGELOG.md&#41; for more information on what has changed recently.)
+
+[//]: # ()
+[//]: # (## Contributing)
+
+[//]: # ()
+[//]: # (Please see [CONTRIBUTING]&#40;https://github.com/jaosorio1013/.github/blob/main/CONTRIBUTING.md&#41; for details.)
+
+[//]: # ()
+[//]: # (## Security Vulnerabilities)
+
+[//]: # ()
+[//]: # (Please review [our security policy]&#40;../../security/policy&#41; on how to report security vulnerabilities.)
+
+[//]: # ()

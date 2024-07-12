@@ -1,11 +1,11 @@
 <?php
 
-use Konnco\FilamentImport\Tests\Resources\Models\Post;
-use Konnco\FilamentImport\Tests\Resources\Pages\AlternativeColumnsNamesList;
-use Konnco\FilamentImport\Tests\Resources\Pages\HandleCreationList;
-use Konnco\FilamentImport\Tests\Resources\Pages\NonRequiredTestList;
-use Konnco\FilamentImport\Tests\Resources\Pages\ValidateTestList;
-use Konnco\FilamentImport\Tests\Resources\Pages\WithoutMassCreateTestList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Models\Post;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\AlternativeColumnsNamesList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\HandleCreationList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\NonRequiredTestList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\ValidateTestList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\WithoutMassCreateTestList;
 
 use function Pest\Laravel\assertDatabaseCount;
 

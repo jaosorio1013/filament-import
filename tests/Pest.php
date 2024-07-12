@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Storage;
-use Konnco\FilamentImport\Tests\Resources\Pages\CommonTestList;
-use Konnco\FilamentImport\Tests\TestCase;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\CommonTestList;
+use Jaosorio1013\FilamentImport\Tests\TestCase;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Livewire;
 

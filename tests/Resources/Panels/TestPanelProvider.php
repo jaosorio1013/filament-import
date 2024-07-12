@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport\Tests\Resources\Panels;
+namespace Jaosorio1013\FilamentImport\Tests\Resources\Panels;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -14,7 +14,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Konnco\FilamentImport\Tests\Resources\PostResource;
+use Jaosorio1013\FilamentImport\Tests\Resources\PostResource;
 
 class TestPanelProvider extends PanelProvider
 {
@@ -25,7 +25,7 @@ class TestPanelProvider extends PanelProvider
             ->path('test')
             ->default()
             ->resources([PostResource::class])
-            ->discoverPages(in: base_path(__DIR__.'/../Pages'), for: 'Konnco\FilamentImport\Tests\Resources\Pages')
+            ->discoverPages(in: base_path(__DIR__.'/../Pages'), for: 'Jaosorio1013\FilamentImport\Tests\Resources\Pages')
             ->widgets([
                 //
             ])

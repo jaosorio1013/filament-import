@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport\Tests;
+namespace Jaosorio1013\FilamentImport\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -11,8 +11,8 @@ use Filament\Notifications\NotificationsServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
-use Konnco\FilamentImport\FilamentImportServiceProvider;
-use Konnco\FilamentImport\Tests\Resources\Panels\TestPanelProvider;
+use Jaosorio1013\FilamentImport\FilamentImportServiceProvider;
+use Jaosorio1013\FilamentImport\Tests\Resources\Panels\TestPanelProvider;
 use Livewire\LivewireServiceProvider;
 use Maatwebsite\Excel\ExcelServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -57,7 +57,7 @@ class TestCase extends Orchestra
         $migration = include __DIR__.'/Migrations/post_migration.php';
         $migration->up();
 
-        config()->set('filament.resources.namespace', 'Konnco\\FilamentImport\\Tests\\Resources');
+        config()->set('filament.resources.namespace', 'Jaosorio1013\\FilamentImport\\Tests\\Resources');
         config()->set('filament.resources.path', __DIR__.'/Resources');
 
         config()->set('app.key', '6rE9Nz59bGRbeMATftriyQjrpF7DcOQm');

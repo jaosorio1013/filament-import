@@ -1,11 +1,11 @@
 <?php
 
-namespace Konnco\FilamentImport;
+namespace Jaosorio1013\FilamentImport;
 
-use Konnco\FilamentImport\Actions\ImportField as ActionsImportField;
+use Jaosorio1013\FilamentImport\Actions\ImportField as ActionsImportField;
 
 /**
- * @deprecated moved into ```Konnco\FilamentImport\Actions\ImportField```
+ * @deprecated moved into ```Jaosorio1013\FilamentImport\Actions\ImportField```
  */
 class ImportField extends ActionsImportField
 {

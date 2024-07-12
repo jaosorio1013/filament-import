@@ -1,14 +1,14 @@
 <?php
 
-namespace Konnco\FilamentImport\Actions;
+namespace Jaosorio1013\FilamentImport\Actions;
 
-use Konnco\FilamentImport\Concerns\HasColumnMatching;
-use Konnco\FilamentImport\Concerns\HasFieldHelper;
-use Konnco\FilamentImport\Concerns\HasFieldLabel;
-use Konnco\FilamentImport\Concerns\HasFieldMutation;
-use Konnco\FilamentImport\Concerns\HasFieldPlaceholder;
-use Konnco\FilamentImport\Concerns\HasFieldRequire;
-use Konnco\FilamentImport\Concerns\HasFieldValidation;
+use Jaosorio1013\FilamentImport\Concerns\HasColumnMatching;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldHelper;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldLabel;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldMutation;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldPlaceholder;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldRequire;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldValidation;
 
 class ImportField
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport;
+namespace Jaosorio1013\FilamentImport;
 
 use Closure;
 use Filament\Notifications\Notification;
@@ -11,10 +11,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Konnco\FilamentImport\Actions\ImportField;
-use Konnco\FilamentImport\Concerns\HasActionMutation;
-use Konnco\FilamentImport\Concerns\HasActionUniqueField;
-use Konnco\FilamentImport\Concerns\HasTemporaryDisk;
+use Jaosorio1013\FilamentImport\Actions\ImportField;
+use Jaosorio1013\FilamentImport\Concerns\HasActionMutation;
+use Jaosorio1013\FilamentImport\Concerns\HasActionUniqueField;
+use Jaosorio1013\FilamentImport\Concerns\HasTemporaryDisk;
 use Maatwebsite\Excel\Concerns\Importable;
 
 class Import

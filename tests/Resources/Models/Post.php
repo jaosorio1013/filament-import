@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport\Tests\Resources\Models;
+namespace Jaosorio1013\FilamentImport\Tests\Resources\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Konnco\FilamentImport\Tests\Resources;
+namespace Jaosorio1013\FilamentImport\Tests\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Konnco\FilamentImport\Tests\Resources\Models\Post;
-use Konnco\FilamentImport\Tests\Resources\Pages\ValidateTestList;
+use Jaosorio1013\FilamentImport\Tests\Resources\Models\Post;
+use Jaosorio1013\FilamentImport\Tests\Resources\Pages\ValidateTestList;
 
 class PostResource extends Resource
 {

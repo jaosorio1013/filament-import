@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport\Concerns;
+namespace Jaosorio1013\FilamentImport\Concerns;
 
 use Illuminate\Support\Str;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Konnco\FilamentImport\Tests\Resources\Pages;
+namespace Jaosorio1013\FilamentImport\Tests\Resources\Pages;
 
 use Filament\Resources\Pages\ListRecords;
-use Konnco\FilamentImport\Actions\ImportAction;
-use Konnco\FilamentImport\Actions\ImportField;
-use Konnco\FilamentImport\Tests\Resources\PostResource;
+use Jaosorio1013\FilamentImport\Actions\ImportAction;
+use Jaosorio1013\FilamentImport\Actions\ImportField;
+use Jaosorio1013\FilamentImport\Tests\Resources\PostResource;
 
 class NonRequiredTestList extends ListRecords
 {

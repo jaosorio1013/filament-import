@@ -1,6 +1,6 @@
 <?php
 
-namespace Konnco\FilamentImport\Actions;
+namespace Jaosorio1013\FilamentImport\Actions;
 
 use Closure;
 use Filament\Actions\Action;
@@ -12,10 +12,10 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Konnco\FilamentImport\Concerns\HasActionMutation;
-use Konnco\FilamentImport\Concerns\HasActionUniqueField;
-use Konnco\FilamentImport\Concerns\HasTemporaryDisk;
-use Konnco\FilamentImport\Import;
+use Jaosorio1013\FilamentImport\Concerns\HasActionMutation;
+use Jaosorio1013\FilamentImport\Concerns\HasActionUniqueField;
+use Jaosorio1013\FilamentImport\Concerns\HasTemporaryDisk;
+use Jaosorio1013\FilamentImport\Import;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Maatwebsite\Excel\Concerns\Importable;
 
