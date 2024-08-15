@@ -2,7 +2,9 @@
 
 namespace Jaosorio1013\FilamentImport\Actions;
 
+use Filament\Support\Components\Component;
 use Jaosorio1013\FilamentImport\Concerns\HasColumnMatching;
+use Jaosorio1013\FilamentImport\Concerns\HasFieldExample;
 use Jaosorio1013\FilamentImport\Concerns\HasFieldHelper;
 use Jaosorio1013\FilamentImport\Concerns\HasFieldLabel;
 use Jaosorio1013\FilamentImport\Concerns\HasFieldMutation;
@@ -10,7 +12,7 @@ use Jaosorio1013\FilamentImport\Concerns\HasFieldPlaceholder;
 use Jaosorio1013\FilamentImport\Concerns\HasFieldRequire;
 use Jaosorio1013\FilamentImport\Concerns\HasFieldValidation;
 
-class ImportField
+class ImportField extends Component
 {
     use HasColumnMatching;
     use HasFieldHelper;
@@ -19,8 +21,9 @@ class ImportField
     use HasFieldPlaceholder;
     use HasFieldRequire;
     use HasFieldValidation;
+    // use HasFieldExample;
 
-    public function __construct(private string $name)
+    public function __construct(private readonly string $name)
     {
     }
 
