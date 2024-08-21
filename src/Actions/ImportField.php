@@ -21,7 +21,7 @@ class ImportField extends Component
     use HasFieldPlaceholder;
     use HasFieldRequire;
     use HasFieldValidation;
-    // use HasFieldExample;
+    use HasFieldExample;
 
     public function __construct(private readonly string $name)
     {

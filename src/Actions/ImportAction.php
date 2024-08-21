@@ -10,8 +10,10 @@ use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Illuminate\Support\HtmlString;
 use Jaosorio1013\FilamentImport\Concerns\HasActionMutation;
 use Jaosorio1013\FilamentImport\Concerns\HasActionUniqueField;
 use Jaosorio1013\FilamentImport\Concerns\HasTemporaryDisk;
@@ -37,6 +39,8 @@ class ImportAction extends Action
 
     protected ?Closure $handleRecordCreation = null;
 
+    private ?string $fileExample = null;
+
     public static function getDefaultName(): ?string
     {
         return 'import';
@@ -46,7 +50,7 @@ class ImportAction extends Action
     {
         parent::setUp();
 
-        $this->label(fn (): string => __('filament-import::actions.import'));
+        $this->label(fn(): string => __('filament-import::actions.import'));
 
         $this->setInitialForm();
 
@@ -67,7 +71,7 @@ class ImportAction extends Action
                     ->uniqueField($this->uniqueField)
                     ->model($model)
                     ->disk($this->getTemporaryDisk())
-                    ->skipHeader((bool) $data['skipHeader'])
+                    ->skipHeader((bool)$data['skipHeader'])
                     ->massCreate($this->shouldMassCreate)
                     ->handleBlankRows($this->shouldHandleBlankRows)
                     ->mutateBeforeCreate($this->mutateBeforeCreate)
@@ -102,14 +106,15 @@ class ImportAction extends Action
      */
     public function fields(array $fields, int $columns = 1): static
     {
-        $this->fields = collect($fields)->mapWithKeys(fn ($item) => [$item->getName() => $item])->toArray();
+        $this->fields = collect($fields)->mapWithKeys(fn($item) => [$item->getName() => $item])->toArray();
 
         $fields = collect($fields);
 
-        $fields = $fields->map(fn (ImportField|Field $field) => $this->getFields($field))->toArray();
+        $fields = $fields->map(fn(ImportField|Field $field) => $this->getFields($field))->toArray();
 
         $this->form(
             array_merge(
+
                 $this->getInitialFormSchema(),
                 [
                     Fieldset::make(__('filament-import::actions.match_to_column'))
@@ -125,12 +130,29 @@ class ImportAction extends Action
         return $this;
     }
 
+    public function exampleFile(string $fileName): static
+    {
+        $this->fileExample = $fileName;
+
+        return $this;
+    }
+
     protected function getInitialFormSchema(): array
     {
-        return [
+        $initialForm = [];
+        if ($this->fileExample !== null) {
+            $exampleFileRoute = route('download-files', $this->fileExample);
+
+            $initialForm = [
+                Placeholder::make('donwloadExampleFile')
+                    ->label(fn() => new HtmlString('<a href="' . $exampleFileRoute . '" target="_blank">Descargar Archivo de Ejemplo</a>')),
+            ];
+        }
+
+        return array_merge($initialForm, [
             FileUpload::make('file')
                 ->label('')
-                ->required(! app()->environment('testing'))
+                ->required(!app()->environment('testing'))
                 ->acceptedFileTypes(config('filament-import.accepted_mimes'))
                 ->imagePreviewHeight('250')
                 ->reactive()
@@ -143,7 +165,7 @@ class ImportAction extends Action
             Toggle::make('skipHeader')
                 ->default(true)
                 ->label(__('filament-import::actions.skip_header')),
-        ];
+        ]);
     }
 
     private function getFields(ImportField|Field $field): Field
@@ -164,14 +186,14 @@ class ImportAction extends Action
                 $options = $this->cachedHeadingOptions;
 
                 if (count($options) === 0) {
-                    $options = $this->toCollection($filePath, $this->temporaryDiskIsRemote() ? $this->getTemporaryDisk() : null)->first()?->first()->filter(fn ($value) => $value != null)->map('trim')->toArray();
+                    $options = $this->toCollection($filePath, $this->temporaryDiskIsRemote() ? $this->getTemporaryDisk() : null)->first()?->first()->filter(fn($value) => $value != null)->map('trim')->toArray();
                 }
 
                 $selected = array_search($field->getName(), $options);
 
                 if ($selected !== false) {
                     $set($field->getName(), $selected);
-                } elseif (! empty($field->getAlternativeColumnNames())) {
+                } elseif (!empty($field->getAlternativeColumnNames())) {
                     $alternativeNames = array_intersect($field->getAlternativeColumnNames(), $options);
                     if (count($alternativeNames) > 0) {
                         $set($field->getName(), array_search(current($alternativeNames), $options));
