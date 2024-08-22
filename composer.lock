@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd2eaf859b658c4d1558469e2851b0af",
+    "content-hash": "26367419915dc01f09e53b8fd835709a",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3315,16 +3315,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.2",
+            "version": "v3.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "636725c1f87bc7844dd80277488268db27eec1aa"
+                "reference": "597a2808d8d3001cc3ed5ce89a6ebab00f83b80f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/636725c1f87bc7844dd80277488268db27eec1aa",
-                "reference": "636725c1f87bc7844dd80277488268db27eec1aa",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/597a2808d8d3001cc3ed5ce89a6ebab00f83b80f",
+                "reference": "597a2808d8d3001cc3ed5ce89a6ebab00f83b80f",
                 "shasum": ""
             },
             "require": {
@@ -3332,6 +3332,7 @@
                 "illuminate/routing": "^10.0|^11.0",
                 "illuminate/support": "^10.0|^11.0",
                 "illuminate/validation": "^10.0|^11.0",
+                "laravel/prompts": "^0.1.24",
                 "league/mime-type-detection": "^1.9",
                 "php": "^8.1",
                 "symfony/console": "^6.0|^7.0",
@@ -3340,7 +3341,6 @@
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
                 "laravel/framework": "^10.15.0|^11.0",
-                "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^8.21.0|^9.0",
                 "orchestra/testbench-dusk": "^8.24|^9.1",
@@ -3379,7 +3379,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.2"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.6"
             },
             "funding": [
                 {
@@ -3387,7 +3387,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-03T17:22:45+00:00"
+            "time": "2024-08-19T11:52:18+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -8424,16 +8424,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.16.2",
+            "version": "v1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "51f1ba679a6afe0315621ad143d788bd7ded0eca"
+                "reference": "e8a88130a25e3f9d4d5785e6a1afca98268ab110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/51f1ba679a6afe0315621ad143d788bd7ded0eca",
-                "reference": "51f1ba679a6afe0315621ad143d788bd7ded0eca",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/e8a88130a25e3f9d4d5785e6a1afca98268ab110",
+                "reference": "e8a88130a25e3f9d4d5785e6a1afca98268ab110",
                 "shasum": ""
             },
             "require": {
@@ -8444,13 +8444,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.59.3",
-                "illuminate/view": "^10.48.12",
-                "larastan/larastan": "^2.9.7",
+                "friendsofphp/php-cs-fixer": "^3.61.1",
+                "illuminate/view": "^10.48.18",
+                "larastan/larastan": "^2.9.8",
                 "laravel-zero/framework": "^10.4.0",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.34.8"
+                "pestphp/pest": "^2.35.0"
             },
             "bin": [
                 "builds/pint"
@@ -8486,7 +8486,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-07-09T15:58:08+00:00"
+            "time": "2024-08-06T15:11:54+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -12747,7 +12747,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
