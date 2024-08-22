@@ -25,7 +25,7 @@
     "illuminate/contracts": "^11.0",
     "illuminate/support": "^11.0",
     "livewire/livewire": "^3",
-    "maatwebsite/excel": "^3.1",
+    "maatwebsite/excel": "3.1.55",
     "psr/simple-cache": "^2.0|^3.0",
     "spatie/laravel-package-tools": "^1.16"
   },
